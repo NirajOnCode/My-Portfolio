@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #050816;
+  --color-violet: #915EFF;
+  --color-cyan: #00F0FF;
+  --color-gray-body: #aaa6c3;
+  --font-sans: "Space Grotesk", "Poppins", sans-serif;
+}
+
+* {
+  font-family: var(--font-sans);
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-primary);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0a1f; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-violet), var(--color-cyan));
+  border-radius: 4px;
+}
+
+.grad-text {
+  background: linear-gradient(90deg, var(--color-violet), var(--color-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.glow-border {
+  position: relative;
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+.glow-border:hover {
+  box-shadow: 0 0 25px rgba(145, 94, 255, 0.45), 0 0 25px rgba(0, 240, 240, 0.15);
+}
+
+.noise-bg {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.06) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.btn-grad {
+  background: linear-gradient(90deg, var(--color-violet), var(--color-cyan));
+  background-size: 200% auto;
+  transition: all 0.35s ease;
+}
+.btn-grad:hover {
+  background-position: right center;
+  box-shadow: 0 0 30px rgba(145, 94, 255, 0.6);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.nav-link { position: relative; }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--color-violet), var(--color-cyan));
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+.skill-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.skill-card:hover {
+  transform: translateY(-6px) scale(1.05) rotate(-1deg);
+  box-shadow: 0 0 20px rgba(145, 94, 255, 0.4);
+}
+
+.reveal { opacity: 0; transform: translateY(40px); }
+
+.blink { animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.bounce { animation: bounce 2s infinite; }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}

@@ -1,0 +1,27 @@
+import { useState, useEffect } from "react";
+
+export default function useTypewriter(words, speed = 70, pause = 1400) {
+  const [text, setText] = useState("");
+  const [idx, setIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = words[idx % words.length];
+    let timeout;
+
+    if (!deleting && text.length < current.length) {
+      timeout = setTimeout(() => setText(current.slice(0, text.length + 1)), speed);
+    } else if (!deleting && text.length === current.length) {
+      timeout = setTimeout(() => setDeleting(true), pause);
+    } else if (deleting && text.length > 0) {
+      timeout = setTimeout(() => setText(current.slice(0, text.length - 1)), speed / 2);
+    } else if (deleting && text.length === 0) {
+      setDeleting(false);
+      setIdx((i) => i + 1);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [text, deleting, idx, words, speed, pause]);
+
+  return text;
+}
